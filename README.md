@@ -57,13 +57,14 @@ Visit `http://127.0.0.1:8000/` in your browser to use the application.
 
 ---
 
-## 💡 Notes
+
 
 - Make sure you have Python 3.8+ and pip installed.
 - Use `python manage.py createsuperuser` to create an admin account for the Django admin panel.
 
 ---
-
-## 📄 License
-
-This project is licensed under the MIT License. Feel free to use and modify it.
+### Team Details:
+- Parth(2410993302)[Leader]
+- Disha Singla(2410993268)
+- Partap Singh(2410993301)
+- Mihir Khatter(2410993293)
