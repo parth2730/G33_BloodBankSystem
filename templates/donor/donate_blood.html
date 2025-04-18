@@ -1,0 +1,120 @@
+{% extends 'donor/donorbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+  <link href="{% static "css/main.css" %}" rel="stylesheet" media="all">
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0f7fa, #fff3e0);
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .card-5 {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+    }
+
+    .card-heading {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: white;
+      padding: 20px;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    .title {
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .btn-success {
+      background: linear-gradient(45deg, #66bb6a, #43a047);
+      border: none;
+    }
+
+    .btn-success:hover {
+      opacity: 0.9;
+    }
+
+    .form-row {
+      margin-bottom: 20px;
+    }
+
+    .text-center {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+  <div class="wrapper wrapper--w790">
+    <div class="card card-5">
+      <div class="card-heading text-center">
+        <h2 class="title">Donate Blood - Save Lives</h2>
+        <p class="mb-0">"A single pint can save three lives, a single gesture can create a million smiles."</p>
+      </div>
+      <div class="card-body">
+        <form method="POST" autocomplete="off" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="form-row">
+            <div class="name">Blood Group</div>
+            <div class="value">
+              <div class="input-group">
+                <div class="rs-select2 js-select-simple select--no-search">
+                  <select name="bloodgroup" class="form-control">
+                    <option disabled selected>Please Select</option>
+                    <option>O+</option>
+                    <option>O-</option>
+                    <option>A+</option>
+                    <option>A-</option>
+                    <option>B+</option>
+                    <option>B-</option>
+                    <option>AB+</option>
+                    <option>AB-</option>
+                  </select>
+                  <div class="select-dropdown"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="name">Unit (ml)</div>
+            <div class="value">
+              <div class="input-group">
+                {% render_field donation_form.unit|attr:'required:true' class="input--style-5" %}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="name">Disease (if any)</div>
+            <div class="value">
+              <div class="input-group">
+                {% render_field donation_form.disease|attr:'required:true' class="input--style-5" %}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="name">Age</div>
+            <div class="value">
+              <div class="input-group">
+                {% render_field donation_form.age|attr:'required:true' class="input--style-5" %}
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn--radius-2 btn-success" type="submit">DONATE</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
