@@ -1,0 +1,83 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+
+<style>
+  .table th {
+    color: #e2e2e2;
+    font-weight: 500;
+  }
+
+  .table thead {
+    background-color: #343a40;
+  }
+
+  .table td, .table th {
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .btn-action a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .btn-action .btn {
+    margin-right: 5px;
+  }
+</style>
+
+<div class="container my-5">
+  {% if requests %}
+    <h4 class="text-center mb-4">Blood Requested</h4>
+
+    {% if message %}
+      <h5 class="text-center text-danger">{{ message }}</h5>
+    {% endif %}
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped align-middle">
+        <thead>
+          <tr>
+            <th>Patient's Name</th>
+            <th>Age</th>
+            <th>Reason</th>
+            <th>Blood Group</th>
+            <th>Unit (ml)</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in requests %}
+          <tr>
+            <td>{{ t.patient_name }}</td>
+            <td>{{ t.patient_age }}</td>
+            <td>{{ t.reason }}</td>
+            <td>{{ t.bloodgroup }}</td>
+            <td>{{ t.unit }}</td>
+            <td>{{ t.date }}</td>
+            <td>{{ t.status }}</td>
+            <td class="btn-action">
+              <a href="{% url 'update-approve-status' t.id %}" class="btn btn-success btn-sm">
+                <i class="fa fa-check"></i> Approve
+              </a>
+              <a href="{% url 'update-reject-status' t.id %}" class="btn btn-danger btn-sm">
+                <i class="fa fa-times"></i> Reject
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-danger text-center" role="alert">
+      No Blood Request By Patient/Donor!
+    </div>
+  {% endif %}
+</div>
+
+{% endblock content %}

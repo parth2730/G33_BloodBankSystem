@@ -1,0 +1,66 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+
+<style>
+  .table th {
+    color: #e2e2e2;
+    font-weight: 500;
+  }
+
+  .btn-action a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .btn-action .btn {
+    margin-right: 5px;
+  }
+
+  .table thead {
+    background-color: #343a40;
+  }
+
+  .table td, .table th {
+    vertical-align: middle;
+  }
+</style>
+
+<div class="container my-5">
+  <h4 class="text-center mb-4">Donor's Detail</h4>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered align-middle">
+      <thead>
+        <tr class="text-center">
+          <th>Name</th>
+          <th>Blood Group</th>
+          <th>Address</th>
+          <th>Contact</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in donors %}
+        <tr class="text-center">
+          <td>{{ t.get_name }}</td>
+          <td>{{ t.bloodgroup }}</td>
+          <td>{{ t.address }}</td>
+          <td>{{ t.mobile }}</td>
+          <td class="btn-action">
+            <a href="{% url 'update-donor' t.id %}" class="btn btn-success btn-sm">
+              <i class="fa fa-edit"></i> Edit
+            </a>
+            <a href="{% url 'delete-donor' t.id %}" class="btn btn-danger btn-sm">
+              <i class="fa fa-trash"></i> Delete
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

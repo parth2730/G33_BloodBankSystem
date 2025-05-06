@@ -1,0 +1,90 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+
+<style>
+  .dashboard-card {
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .dashboard-card:hover {
+    transform: scale(1.02);
+  }
+
+  .blood h2, .blood i {
+    color: #d41010;
+    font-weight: bold;
+  }
+
+  .info-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .info-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+</style>
+
+<div class="container my-5">
+  <div class="row text-center g-4">
+    {% for group, unit in [('A+', A1.unit), ('B+', B1.unit), ('O+', O1.unit), ('AB+', AB1.unit), ('A-', A2.unit), ('B-', B2.unit), ('O-', O2.unit), ('AB-', AB2.unit)] %}
+      <div class="col-sm-6 col-md-3">
+        <div class="card bg-light dashboard-card h-100">
+          <div class="card-body">
+            <h2 class="blood">{{ group }} <i class="fas fa-tint"></i></h2>
+            <hr>
+            <div class="info-value">{{ unit }} ml</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <hr class="my-5">
+
+  <div class="row text-center g-4">
+    <div class="col-sm-6 col-md-3">
+      <div class="card bg-light dashboard-card h-100">
+        <div class="card-body">
+          <i class="fas fa-users fa-2x mb-2 text-primary"></i>
+          <div class="info-title">Available Donors</div>
+          <div class="info-value">{{ totaldonors }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="card bg-light dashboard-card h-100">
+        <div class="card-body">
+          <i class="fas fa-spinner fa-2x mb-2 text-warning"></i>
+          <div class="info-title">Total Requests</div>
+          <div class="info-value">{{ totalrequest }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="card bg-light dashboard-card h-100">
+        <div class="card-body">
+          <i class="fas fa-tint fa-2x mb-2 text-danger"></i>
+          <div class="info-title">Total Blood Units</div>
+          <div class="info-value">{{ totalbloodunit }} ml</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="card bg-light dashboard-card h-100">
+        <div class="card-body">
+          <i class="far fa-check-circle fa-2x mb-2 text-success"></i>
+          <div class="info-title">Approved Requests</div>
+          <div class="info-value">{{ totalapprovedrequest }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

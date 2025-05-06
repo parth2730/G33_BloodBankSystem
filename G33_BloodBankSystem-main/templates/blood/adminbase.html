@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | RedHope</title>
+
+  <!-- Bootstrap & FontAwesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css" />
+
+  <style>
+    body {
+      background-color: #f3f5f9;
+      margin: 0;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+
+    .navbar {
+      background-color: black;
+    }
+
+    .navbar-brand {
+      font-size: 26px;
+      font-weight: 700;
+      color: white !important;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    .sidebar {
+      width: 200px;
+      min-height: 100vh;
+      background: #343a40;
+      padding-top: 30px;
+      position: fixed;
+    }
+
+    .sidebar ul {
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar ul li a {
+      color: #dedede;
+      display: block;
+      font-weight: 500;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #7a7a7a;
+    }
+
+    .sidebar ul li:hover a {
+      color: white;
+    }
+
+    .main_content {
+      margin-left: 200px;
+      width: 100%;
+      padding: 30px;
+    }
+
+    .fa-icon {
+      font-size: 1.2rem;
+      margin-right: 8px;
+    }
+
+    .logout-link {
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+
+      .main_content {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <a class="navbar-brand" href="/"><i class="fa fa-heartbeat"></i>&nbsp;<font face="Comic Sans MS">RedHope</font></a>
+    <div class="ml-auto">
+      <a class="logout-link nav-link" href="/logout">Logout &nbsp;<i class="fas fa-power-off"></i></a>
+    </div>
+  </nav>
+
+  <!-- Sidebar + Content -->
+  <div class="wrapper">
+    <div class="sidebar">
+      <ul>
+        <li><a href="/"><i class="fas fa-home fa-icon"></i>Home</a></li>
+        <li><a href="/admin-donor"><i class="fas fa-user fa-icon"></i>Donor</a></li>
+        <li><a href="/admin-patient"><i class="fas fa-user-injured fa-icon"></i>Patient</a></li>
+        <li><a href="/admin-donation"><i class="fas fa-hand-holding-medical fa-icon"></i>Donations</a></li>
+        <li><a href="/admin-request"><i class="fas fa-sync-alt fa-icon"></i>Blood Requests</a></li>
+        <li><a href="/admin-request-history"><i class="fas fa-history fa-icon"></i>Request History</a></li>
+        <li><a href="/admin-blood"><i class="fas fa-hand-holding-water fa-icon"></i>Blood Stock</a></li>
+      </ul>
+    </div>
+
+    <div class="main_content">
+      {% block content %}
+      {% endblock content %}
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

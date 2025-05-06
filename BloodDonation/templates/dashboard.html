@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<style>
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: url("{{ url_for('static', filename='images/bg.jpg') }}") no-repeat center center fixed;
+        background-size: cover;
+        /* margin: 0; */
+        padding: 0;
+        background: url(static/img/12128.jpg) no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .dashboard-header {
+        text-align: center;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 25px;
+        border-radius: 12px;
+        max-width: 600px;
+        margin: 30px auto;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        margin-top: 160px;
+        margin-left: 100px;
+        color: white;
+    }
+
+    /* User Details Section */
+    .user-details {
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        text-align: left;
+        margin-left: 145px;
+    }
+
+    .user-details p {
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0;
+        color: #333;
+    }
+
+    .user-details i {
+        font-size: 20px;
+        color: #ffeb3b;
+    }
+
+    /* Logout Button */
+    .logout-btn {
+        display: block;
+        text-align: center;
+        background: #ff4d4d;
+        color: white;
+        text-decoration: none;
+        padding: 12px;
+        font-size: 18px;
+        border-radius: 8px;
+        margin-top: 15px;
+        transition: all 0.3s ease-in-out;
+        width: 100%;
+        text-transform: uppercase;
+    }
+
+    .logout-btn:hover {
+        background: #d43f3f;
+        transform: scale(1.05);
+    }
+</style>
+
+<!-- Dashboard Header -->
+<header class="dashboard-header">
+    <h1>👋 Welcome, {{ user.first_name }} {{ user.last_name }}!</h1>
+</header>
+
+<!-- User Details Section -->
+<section class="user-details">
+    <p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> {{ user.email }}</p>
+    <p><i class="fa-solid fa-user"></i> <strong>Username:</strong> {{ user.username }}</p>
+    <p><i class="fa-solid fa-calendar-day"></i> <strong>Date of Birth:</strong> {{ user.dob }}</p>
+    <a href="{{ url_for('logout') }}" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+</section>
+
+
+
+
+{% endblock %}

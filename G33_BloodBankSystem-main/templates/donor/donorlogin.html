@@ -1,0 +1,169 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Donor Login | RedHope</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap & Icons -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+
+  <style>
+    body {
+      background-color: #f7f7f7;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #d32f2f;
+    }
+
+    .navbar-brand, .nav-link {
+      color: white !important;
+      font-weight: 600;
+    }
+
+    .navbar-brand:hover, .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Login card */
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .card-login {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 40px 30px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .card-login h2 {
+      color: #d32f2f;
+      font-weight: 700;
+      font-size: 28px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 10px 15px;
+    }
+
+    .form-control:focus {
+      border-color: #d32f2f;
+      box-shadow: 0 0 5px rgba(211, 47, 47, 0.3);
+      background-color: #fff;
+    }
+
+    .btn-red {
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 25px;
+      font-weight: 600;
+      width: 100%;
+      transition: 0.3s ease-in-out;
+    }
+
+    .btn-red:hover {
+      background-color: #b71c1c;
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .form-footer a {
+      color: #d32f2f;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .form-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .quote {
+      margin-top: 25px;
+      font-style: italic;
+      text-align: center;
+      color: #555;
+      font-size: 14px;
+    }
+
+    @media (max-width: 576px) {
+      .card-login {
+        padding: 30px 20px;
+      }
+
+      .card-login h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  {% include "blood/navbar.html" %}
+
+  <div class="login-wrapper">
+    <div class="card-login">
+      <h2>Donor Login</h2>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          {% render_field form.username class="form-control" placeholder="Enter your username" %}
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" placeholder="Enter your password"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+            title="Password must be at least 8 characters long and contain at least one letter and one number"
+            required>
+        </div>
+        <button type="submit" class="btn btn-red mt-3">Login</button>
+      </form>
+
+      <div class="form-footer mt-3">
+        Don’t have an account? <a href="/donor/donorsignup">Register now</a>
+      </div>
+
+      <div class="quote">
+        “The gift of blood is the gift of life.”<br>
+        “Thank you for being someone’s hero.”
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

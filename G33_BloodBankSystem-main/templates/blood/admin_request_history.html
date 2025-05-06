@@ -1,0 +1,83 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+
+<style>
+  .label {
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .label.success {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .label.danger {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  .table th {
+    color: #e2e2e2;
+    font-weight: 500;
+  }
+
+  .table thead {
+    background-color: #343a40;
+  }
+
+  .table td, .table th {
+    vertical-align: middle;
+    text-align: center;
+  }
+</style>
+
+<div class="container my-5">
+  <h4 class="text-center mb-4">Blood Request History</h4>
+
+  {% if message %}
+    <h5 class="text-center text-danger">{{ message }}</h5><br>
+  {% endif %}
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered align-middle">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Age</th>
+          <th>Reason</th>
+          <th>Blood Group</th>
+          <th>Unit (ml)</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Stock Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in requests %}
+        <tr>
+          <td>{{ t.patient_name }}</td>
+          <td>{{ t.patient_age }}</td>
+          <td>{{ t.reason }}</td>
+          <td>{{ t.bloodgroup }}</td>
+          <td>{{ t.unit }}</td>
+          <td>{{ t.date }}</td>
+          {% if t.status == 'Approved' %}
+            <td><span class="label success">Approved</span></td>
+            <td><span class="label success">{{ t.unit }} Unit Deducted From Stock</span></td>
+          {% else %}
+            <td><span class="label danger">Rejected</span></td>
+            <td><span class="label danger">0 Unit Deducted From Stock</span></td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

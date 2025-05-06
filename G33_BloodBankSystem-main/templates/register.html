@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+</head>
+<body>
+  <h2>Register</h2>
+  <form id="registerForm">
+    <input name="first_name" placeholder="First Name" required><br>
+    <input name="last_name" placeholder="Last Name" required><br>
+    <input name="email" type="email" placeholder="Email" required><br>
+    <input name="dob" placeholder="DOB (YYYY-MM-DD)" required><br>
+    <input name="username" placeholder="Username" required><br>
+    <input name="password" type="password" placeholder="Password" required><br>
+    <button type="submit">Register</button>
+  </form>
+
+  <div id="message"></div>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        first_name: form.first_name.value,
+        last_name: form.last_name.value,
+        email: form.email.value,
+        dob: form.dob.value,
+        username: form.username.value,
+        password: form.password.value,
+      };
+
+      const response = await fetch("http://127.0.0.1:5000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+      document.getElementById("message").innerText = result.message || "Error occurred";
+    });
+  </script>
+</body>
+</html>

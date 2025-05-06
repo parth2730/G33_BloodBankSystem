@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RedHope - Save Lives</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+
+    header {
+      background-color: #c62828;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      background-image: url('{% static "image/background.jpg" %}');
+      background-size: cover;
+      background-position: center;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      padding-left: 10%;
+      background-blend-mode: multiply;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero h2 {
+      font-size: 60px;
+      margin-bottom: 20px;
+      color: #ff5252;
+    }
+
+    .hero p {
+      max-width: 500px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .hero button {
+      margin-top: 20px;
+      padding: 12px 28px;
+      background-color: #e53935;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .hero button:hover {
+      background-color: #b71c1c;
+    }
+
+    section {
+      padding: 60px 10%;
+      background-color: #1a1a1a;
+    }
+
+    section h3 {
+      color: #ff5252;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    section p, ul {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #ddd;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background-color: #000;
+      text-align: center;
+      padding: 30px 20px;
+      color: #999;
+      font-size: 14px;
+    }
+
+    .social {
+      margin: 10px 0;
+    }
+
+    .social a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .social a:hover {
+      color: #ff5252;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        padding: 30px 20px;
+        text-align: center;
+      }
+
+      .hero h2 {
+        font-size: 40px;
+      }
+
+      nav a {
+        margin: 10px 10px 0;
+        display: inline-block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  {% include "blood/navbar.html" %}
+
+
+  <div class="hero">
+    <div>
+      <h2>Donate Blood, Save Lives</h2>
+      <p style="max-width: 500px; font-size: 18px; line-height: 1.6; color: #ffffff;">
+        Blood donation is a simple yet powerful way to help your community. Each drop you give brings hope to someone in need — from accident victims to patients with chronic diseases.
+      </p>
+      <a href="{% url 'donorlogin' %}">
+        <button>Become a Donor</button>
+      </a>
+      {% comment %} <button style="background-color: #444; margin-top: 10px;" onclick="callFlaskAPI()">Test Flask API</button> {% endcomment %}
+    </div>
+  </div>
+  
+  <script>
+    async function callFlaskAPI() {
+      try {
+        const response = await fetch("http://127.0.0.1:5000/api/dashboard/testuser");
+        const data = await response.json();
+        if (data.status === "success") {
+          alert("Flask API is working!\n\nUsername: " + data.user.username + "\nEmail: " + data.user.email);
+        } else {
+          alert("API Error: " + data.message);
+        }
+      } catch (error) {
+        alert("Failed to connect to Flask API.\n" + error);
+      }
+    }
+  </script>
+  
+
+<section id="about">
+  <h3>Why Donate Blood?</h3>
+  <p>
+    Every year, millions rely on blood transfusions to survive. Whether it's for surgery, trauma recovery, or disease treatment — there's no substitute for donated blood. When you donate, you're offering someone a second chance at life.
+  </p>
+</section>
+
+<section id="prepare">
+  <h3>Before You Donate</h3>
+  <ul>
+    <li>Get a good night's sleep the day before.</li>
+    <li>Eat a healthy meal and drink water before donating.</li>
+    <li>Bring an ID and avoid heavy physical activity post-donation.</li>
+  </ul>
+</section>
+
+<section id="eligibility">
+  <h3>Who Can Donate?</h3>
+  <ul>
+    <li>You must be in good general health.</li>
+    <li>Age: 17+ (16 with parental consent).</li>
+    <li>Weight: Minimum 50 kg (110 lbs).</li>
+    <li>No recent infections or surgeries.</li>
+  </ul>
+</section>
+
+<footer>
+  <div class="social">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+  </div>
+  <p>&copy; 2025 RedHope. Designed with ❤️ to save lives.</p>
+</footer>
+
+</body>
+</html>

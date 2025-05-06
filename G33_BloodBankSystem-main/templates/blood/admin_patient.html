@@ -1,0 +1,79 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+
+<style>
+  .table th {
+    color: #e2e2e2;
+    font-weight: 500;
+  }
+
+  .table thead {
+    background-color: #343a40;
+  }
+
+  .table td, .table th {
+    vertical-align: middle;
+  }
+
+  .patient-photo {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 45px;
+    height: 45px;
+  }
+
+  .btn-action a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .btn-action .btn {
+    margin-right: 5px;
+  }
+</style>
+
+<div class="container my-5">
+  <h4 class="text-center mb-4">Patient's Detail</h4>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped align-middle">
+      <thead class="text-center">
+        <tr>
+          <th>Name</th>
+          <th>Photo</th>
+          <th>Blood Group</th>
+          <th>Age</th>
+          <th>Disease</th>
+          <th>Contact</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in patients %}
+        <tr class="text-center">
+          <td>{{ t.get_name }}</td>
+          <td>
+            <img src="{% static t.profile_pic.url %}" alt="Profile Pic" class="patient-photo" />
+          </td>
+          <td>{{ t.bloodgroup }}</td>
+          <td>{{ t.age }}</td>
+          <td>{{ t.disease }}</td>
+          <td>{{ t.mobile }}</td>
+          <td class="btn-action">
+            <a href="{% url 'update-patient' t.id %}" class="btn btn-success btn-sm">
+              <i class="fa fa-edit"></i> Edit
+            </a>
+            <a href="{% url 'delete-patient' t.id %}" class="btn btn-danger btn-sm">
+              <i class="fa fa-trash"></i> Delete
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

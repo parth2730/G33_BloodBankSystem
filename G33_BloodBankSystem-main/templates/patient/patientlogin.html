@@ -1,0 +1,217 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Login</title>
+
+  <!-- Bootstrap & Icons -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+  <!-- AOS for animations -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body, html {
+        height: 100%;
+        font-family: 'Poppins', sans-serif;
+        {% comment %} background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{% static "image/patientlogin.jpg" %}'); {% endcomment %}
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    .wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding-right: 0;
+        margin-right: 0;
+    }
+
+    .content {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 20px;
+    }
+
+    .card-5 {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 450px;
+        backdrop-filter: blur(10px);
+    }
+
+    .card-heading {
+        color: #ffffff;
+        padding: 30px 20px;
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .card-body {
+        padding: 40px 30px;
+    }
+
+    .form-row {
+        margin-bottom: 25px;
+    }
+
+    .name {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #2c3e50;
+        font-size: 16px;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        font-size: 15px;
+    }
+
+    .input-group input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        background: #fff;
+    }
+
+    .btn-success {
+        background-color: #3498db;
+        border: none;
+        padding: 12px 25px;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-success:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    }
+
+    .quote {
+        text-align: center;
+        font-style: italic;
+        font-size: 15px;
+        margin-top: 30px;
+        color: #7f8c8d;
+        line-height: 1.6;
+    }
+
+    .text-center a {
+        color: #3498db;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .text-center a:hover {
+        color: #2980b9;
+        text-decoration: none;
+    }
+
+    @media screen and (max-width: 576px) {
+        .card-5 {
+            margin: 0 15px;
+        }
+        
+        .card-heading {
+            font-size: 24px;
+            padding: 25px 15px;
+        }
+        
+        .card-body {
+            padding: 30px 20px;
+        }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    {% include "blood/navbar.html" %}
+
+    <div class="content">
+      <div class="card card-5" data-aos="fade-up">
+        <div class="card-heading">
+          Patient Login
+        </div>
+        <div class="card-body">
+          <form method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+              <div class="name">Username</div>
+              <div class="value">
+                <div class="input-group">
+                  {% render_field form.username class="form-control" placeholder="Enter your username" %}
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="name">Password</div>
+              <div class="value">
+                <div class="input-group">
+                  <input type="password" name="password" class="form-control" placeholder="Enter your password"
+                         pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                         title="Password must be at least 8 characters long and contain at least one letter and one number" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button class="btn btn-success btn-block" type="submit">Login</button>
+            </div>
+          </form>
+
+          <br>
+          <p class="text-center">Don't have an account?
+            <a href="/patient/patientsignup">Register Now</a>
+          </p>
+
+          <div class="quote" data-aos="fade-in">
+            “The greatest wealth is health.” <br>
+            “Every drop counts — be the reason someone smiles again.”
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+
+</html>

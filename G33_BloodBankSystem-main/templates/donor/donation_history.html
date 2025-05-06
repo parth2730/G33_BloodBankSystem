@@ -1,0 +1,120 @@
+{% extends 'donor/donorbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+
+<head>
+  <style>
+    body {
+      background: #f0f4f8;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    h4.text-center {
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .table {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .table thead {
+      background: linear-gradient(to right, #2ecc71, #27ae60); /* Emerald green */
+    }
+
+    .table th {
+      color: #fff;
+      font-size: 1rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .table td {
+      vertical-align: middle;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .label {
+      display: inline-block;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      border-radius: 25px;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .success {
+      background-color: #4CAF50;
+    }
+
+    .info {
+      background-color: #2196F3;
+    }
+
+    .danger {
+      background-color: #f44336;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: #f9f9f9;
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: #e8f0fe;
+      transition: 0.3s;
+    }
+
+    @media screen and (max-width: 768px) {
+      .table {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+
+<br><br>
+<div class="container">
+  <h4 class="text-center">My Donation History</h4>
+  <br>
+  <table class="table table-light table-hover table-bordered table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Donor's Age</th>
+        <th scope="col">Disease (if any)</th>
+        <th scope="col">Blood Group</th>
+        <th scope="col">Unit</th>
+        <th scope="col">Date</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in donations %}
+      <tr>
+        <td>{{ t.age }}</td>
+        <td>{{ t.disease }}</td>
+        <td>{{ t.bloodgroup }}</td>
+        <td>{{ t.unit }}</td>
+        <td>{{ t.date }}</td>
+        <td>
+          {% if t.status == 'Approved' %}
+          <span class="label success">Approved</span>
+          {% elif t.status == 'Rejected' %}
+          <span class="label danger">Rejected</span>
+          {% else %}
+          <span class="label info">Pending</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}

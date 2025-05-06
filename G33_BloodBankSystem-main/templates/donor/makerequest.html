@@ -1,0 +1,194 @@
+{% extends 'donor/donorbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+
+<head>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link href="{% static "css/main.css" %}" rel="stylesheet" media="all">
+
+  <style>
+    body {
+      background-color: #f0f4f8;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .page-wrapper {
+      padding: 60px 0;
+    }
+
+    .card-5 {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      padding: 30px;
+    }
+
+    .card-heading {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .card-heading .title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #e74c3c;
+    }
+
+    .form-row {
+      margin-bottom: 20px;
+    }
+
+    .form-row .name {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .input-group {
+      width: 100%;
+    }
+
+    .input--style-5 {
+      border: 1px solid #dcdfe6;
+      border-radius: 6px;
+      height: 42px;
+      padding: 10px 15px;
+      width: 100%;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .input--style-5:focus {
+      border-color: #e74c3c;
+      outline: none;
+      box-shadow: none;
+    }
+
+    .rs-select2 {
+      width: 100%;
+    }
+
+    select.form-control {
+      border: 1px solid #dcdfe6;
+      border-radius: 6px;
+      height: 42px;
+      padding-left: 12px;
+      font-size: 15px;
+    }
+
+    select.form-control:focus {
+      border-color: #e74c3c;
+      outline: none;
+      box-shadow: none;
+    }
+
+    .btn-danger {
+      background-color: #e74c3c;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .btn-danger:hover {
+      background-color: #c0392b;
+    }
+
+    .text-center {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .wrapper--w790 {
+        padding: 0 15px;
+      }
+
+      .card-5 {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+  <div class="wrapper wrapper--w790">
+    <div class="card card-5">
+      <div class="card-heading">
+        <h2 class="title">MAKE BLOOD REQUEST</h2>
+      </div>
+      <div class="card-body">
+        <form method="POST" autocomplete="off" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="form-row">
+            <div class="name">Patient's Name</div>
+            <div class="value">
+              <div class="input-group">
+                {% render_field request_form.patient_name|attr:'required:true' class="input--style-5" %}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="name">Patient Age</div>
+            <div class="value">
+              <div class="input-group">
+                {% render_field request_form.patient_age|attr:'required:true' class="input--style-5" %}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="name">Reason</div>
+            <div class="value">
+              <div class="input-group">
+                {% render_field request_form.reason|attr:'required:true' class="input--style-5" %}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="name">Blood Group</div>
+            <div class="value">
+              <div class="input-group">
+                <div class="rs-select2 js-select-simple select--no-search">
+                  <select name="bloodgroup" class="form-control" required>
+                    <option disabled selected>Please Select</option>
+                    <option>O+</option>
+                    <option>O-</option>
+                    <option>A+</option>
+                    <option>A-</option>
+                    <option>B+</option>
+                    <option>B-</option>
+                    <option>AB+</option>
+                    <option>AB-</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="name">Unit (ml)</div>
+            <div class="value">
+              <div class="input-group">
+                {% render_field request_form.unit|attr:'required:true' class="input--style-5" %}
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn--radius-2 btn-danger" type="submit">REQUEST</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

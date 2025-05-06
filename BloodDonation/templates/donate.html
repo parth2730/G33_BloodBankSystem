@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Blood</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .form-heading {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .form-control, .form-select {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .form-control:focus, .form-select:focus {
+            outline: none;
+            border: 2px solid #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        .btn-submit {
+            background: #ff4b2b;
+            color: white;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .btn-submit:hover {
+            background: #ff416c;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2 class="form-heading">🩸 Blood Donation Form 🩸</h2>
+    <form method="POST" action="{{ url_for('donate') }}">
+       
+        <!-- Aadhaar Number -->
+        <div class="mb-3">
+            <input type="text" class="form-control" name="aadhaar" placeholder="Aadhaar Number" pattern="[0-9]{12}" required>
+        </div>
+        
+        <!-- Name -->
+        <div class="mb-3">
+            <input type="text" class="form-control" name="name" placeholder="Full Name" required>
+        </div>
+        
+        <!-- Age -->
+        <div class="mb-3">
+            <input type="number" class="form-control" name="age" min="18" placeholder="Age" required>
+        </div>
+        
+        <!-- Gender -->
+        <div class="mb-3">
+            <select class="form-select" name="gender" required>
+                <option value="" selected disabled>Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </div>
+        
+        <!-- Weight -->
+        <div class="mb-3">
+            <input type="number" class="form-control" name="weight" min="50" placeholder="Weight (kg)" required>
+        </div>
+        
+        <!-- Blood Group -->
+        <div class="mb-3">
+            <select class="form-select" name="bloodgroup" required>
+                <option value="" selected disabled>Blood Group</option>
+                <option>A+</option>
+                <option>A-</option>
+                <option>B+</option>
+                <option>B-</option>
+                <option>O+</option>
+                <option>O-</option>
+                <option>AB+</option>
+                <option>AB-</option>
+            </select>
+        </div>
+        
+        <!-- Address -->
+        <div class="mb-3">
+            <textarea class="form-control" name="address" rows="3" placeholder="Address" required></textarea>
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-submit">Donate Now</button>
+    </form>
+</div>
+
+    
+</body>
+</html>
